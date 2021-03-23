@@ -29,9 +29,6 @@ from typing import Sequence
 
 import click
 from kcl.assertops import maxone
-from kcl.configops import click_read_config
-from kcl.configops import click_write_config_entry
-from kcl.userops import not_root
 from retry_on_exception import retry_on_exception
 
 
