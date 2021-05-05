@@ -50,6 +50,7 @@ def ask_command(command):
     ic(command)
     result = input()
     ic(result)
+    assert result == '\n'
     sys.exit(1)
 
 
