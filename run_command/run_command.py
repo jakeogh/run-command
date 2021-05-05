@@ -29,7 +29,8 @@ from typing import Sequence
 
 import click
 from kcl.assertops import maxone
-from retry_on_exception import retry_on_exception
+
+#from retry_on_exception import retry_on_exception
 
 
 def eprint(*args, **kwargs):
@@ -44,7 +45,7 @@ except ImportError:
     ic = eprint
 
 
-def ask(command):
+def ask_command(command):
     eprint("Press ENTER to execute command:")
     ic(command)
     result = input()
@@ -86,7 +87,13 @@ def run_command(command,
         if isinstance(command, bytes):
             command = command.decode('utf8')
         #popen_instance = os.popen(command, stderr=stderr)
-        popen_instance = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=stderr, stdin=stdin, shell=shell)
+        if ask:
+            ask_command(command)
+        popen_instance = subprocess.Popen(command,
+                                          stdout=subprocess.PIPE,
+                                          stderr=stderr,
+                                          stdin=stdin,
+                                          shell=shell,)
         if debug:
             ic(popen_instance)
         #output = popen_instance.read()
@@ -102,6 +109,8 @@ def run_command(command,
     elif system:
         if isinstance(command, bytes):
             command = command.decode('utf8')
+        if ask:
+            ask_command(command)
         os.system(command)
 
     else:
@@ -109,6 +118,8 @@ def run_command(command,
             #check = True
             #if ignore_exit_code:
             #    check = False
+            if ask:
+                ask_command(command)
             output = subprocess.check_output(command, stderr=stderr, stdin=stdin, shell=shell)
             if verbose:
                 if output:
