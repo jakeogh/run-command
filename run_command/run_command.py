@@ -49,9 +49,8 @@ def ask_command(command):
     eprint("Press ENTER to execute command:")
     ic(command)
     result = input()
-    ic(result)
-    assert result == '\n'
-    sys.exit(1)
+    if result:
+        sys.exit(1)
 
 
 # https://docs.python.org/3/library/subprocess.html#subprocess.run
