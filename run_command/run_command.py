@@ -44,6 +44,14 @@ except ImportError:
     ic = eprint
 
 
+def ask(command):
+    eprint("Press ENTER to execute command:")
+    ic(command)
+    result = input()
+    ic(result)
+    sys.exit(1)
+
+
 # https://docs.python.org/3/library/subprocess.html#subprocess.run
 def run_command(command,
                 verbose: bool = False,
@@ -56,7 +64,9 @@ def run_command(command,
                 popen: bool = False,
                 system: bool = False,
                 interactive: bool = False,
-                str_output: bool = False):
+                str_output: bool = False,
+                ask: bool = False,
+                ):
 
     maxone([popen, interactive, system], msg='--popen --interactive and --system are mutually exclusive')
 
