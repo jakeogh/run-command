@@ -58,7 +58,7 @@ def run_command(command,
                 verbose: bool = False,
                 debug: bool = False,
                 shell: bool = True,
-                expected_exit_status: int = 0,
+                expected_exit_status: int = None,
                 ignore_exit_code: bool = False,
                 stdin=None,
                 stderr=subprocess.STDOUT,
@@ -70,6 +70,7 @@ def run_command(command,
                 ):
 
     maxone([popen, interactive, system], msg='--popen --interactive and --system are mutually exclusive')
+    maxone([system, expected_exit_status], msg='os.system() can not check the exit status of a command')
 
     if isinstance(command, str):
         command = os.fsencode(command)  # hm.
