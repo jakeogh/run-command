@@ -28,7 +28,7 @@ from typing import List
 from typing import Sequence
 
 import click
-from kcl.assertops import maxone
+from asserttool import maxone
 
 #from retry_on_exception import retry_on_exception
 
