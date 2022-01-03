@@ -22,27 +22,20 @@
 import os
 import subprocess
 import sys
+from math import inf
 from pathlib import Path
 from typing import Generator
 from typing import List
 from typing import Sequence
 
 import click
+from asserttool import eprint
+from asserttool import ic
 from asserttool import maxone
+from clicktool import click_add_options
+from clicktool import click_global_options
 
 #from retry_on_exception import retry_on_exception
-
-
-def eprint(*args, **kwargs):
-    if 'file' in kwargs.keys():
-        kwargs.pop('file')
-    print(*args, file=sys.stderr, **kwargs)
-
-
-try:
-    from icecream import ic  # https://github.com/gruns/icecream
-except ImportError:
-    ic = eprint
 
 
 def ask_command(command):
@@ -55,8 +48,7 @@ def ask_command(command):
 
 # https://docs.python.org/3/library/subprocess.html#subprocess.run
 def run_command(command,
-                verbose: bool = False,
-                debug: bool = False,
+                verbose: int,
                 shell: bool = True,
                 expected_exit_status: int = None,
                 ignore_exit_code: bool = False,
@@ -95,7 +87,7 @@ def run_command(command,
                                           stderr=stderr,
                                           stdin=stdin,
                                           shell=shell,)
-        if debug:
+        if verbose == inf:
             ic(popen_instance)
         #output = popen_instance.read()
         output, errors = popen_instance.communicate()
@@ -142,45 +134,10 @@ def run_command(command,
 
 
 @click.command()
-@click.option('--verbose', is_flag=True)
-@click.option('--debug', is_flag=True)
-@click.option('--simulate', is_flag=True)
-@click.option('--ipython', is_flag=True)
-@click.option('--count', is_flag=True)
-@click.option('--skip', type=int, default=False)
-@click.option('--head', type=int, default=False)
-@click.option('--tail', type=int, default=False)
-@click.option("--printn", is_flag=True)
+@click_add_options(click_global_options)
 @click.pass_context
 def cli(ctx,
-        verbose: bool,
-        debug: bool,
-        simulate: bool,
-        ipython: bool,
-        count: bool,
-        skip: int,
-        head: int,
-        tail: int,
-        printn: bool,):
-
-    null = not printn
-    end = '\n'
-    if null:
-        end = '\x00'
-    if sys.stdout.isatty():
-        end = '\n'
-        assert not ipython
-
-    if (verbose or debug):
-        progress = False
-
-    ctx.ensure_object(dict)
-    ctx.obj['verbose'] = verbose
-    ctx.obj['debug'] = debug
-    ctx.obj['end'] = end
-    ctx.obj['null'] = null
-    ctx.obj['progress'] = progress
-    ctx.obj['count'] = count
-    ctx.obj['skip'] = skip
-    ctx.obj['head'] = head
-    ctx.obj['tail'] = tail
+        verbose: int,
+        verbose_inf: bool,
+        ):
+    pass
