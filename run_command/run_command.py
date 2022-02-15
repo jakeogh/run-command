@@ -27,13 +27,14 @@ from pathlib import Path
 from typing import Generator
 from typing import List
 from typing import Sequence
+from typing import Union
 
 import click
-from asserttool import eprint
 from asserttool import ic
 from asserttool import maxone
 from clicktool import click_add_options
 from clicktool import click_global_options
+from eprint import eprint
 
 #from retry_on_exception import retry_on_exception
 
@@ -48,7 +49,7 @@ def ask_command(command):
 
 # https://docs.python.org/3/library/subprocess.html#subprocess.run
 def run_command(command,
-                verbose: int,
+                verbose: Union[bool, int, float],
                 shell: bool = True,
                 expected_exit_status: int = None,
                 ignore_exit_code: bool = False,
@@ -137,7 +138,7 @@ def run_command(command,
 @click_add_options(click_global_options)
 @click.pass_context
 def cli(ctx,
-        verbose: int,
+        verbose: Union[bool, int, float],
         verbose_inf: bool,
         ):
     pass
