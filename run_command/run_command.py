@@ -62,7 +62,7 @@ def run_command(
     ask: bool = False,
 ):
 
-    epprint(f"{command=}")
+    epprint(f"\n{command=}\n")
     maxone(
         [popen, interactive, system],
         msg="--popen --interactive and --system are mutually exclusive",
