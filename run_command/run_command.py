@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Generator
 
 import click
-# from asserttool import ic
+from asserttool import ic
 from asserttool import maxone
 from clicktool import click_add_options
 from clicktool import click_global_options
