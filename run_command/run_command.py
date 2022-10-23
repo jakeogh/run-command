@@ -62,7 +62,6 @@ def run_command(
     ask: bool = False,
 ):
 
-    epprint(f"\n{command=}\n")
     maxone(
         [popen, interactive, system],
         msg="--popen --interactive and --system are mutually exclusive",
@@ -83,7 +82,7 @@ def run_command(
 
     output = None
     if verbose:
-        epprint(command, shell)
+        epprint(f"\n{command=}", f"{shell=}\n")
     if popen:
         if isinstance(command, bytes):
             command = command.decode("utf8")
