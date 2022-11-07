@@ -82,7 +82,7 @@ def run_command(
 
     output = None
     if verbose:
-        epprint(f"\n{command=}", f"{shell=}\n")
+        epprint(f"\n{command=}", f"{shell=}", f"{system=}", f"{popen=}\n")
     if popen:
         if isinstance(command, bytes):
             command = command.decode("utf8")
@@ -96,7 +96,7 @@ def run_command(
             stdin=stdin,
             shell=shell,
         )
-        if verbose == inf:
+        if verbose:
             epprint(popen_instance)
         # output = popen_instance.read()
         output, errors = popen_instance.communicate()
