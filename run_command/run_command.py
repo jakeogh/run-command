@@ -128,7 +128,7 @@ def run_command(
             if verbose:
                 if output:
                     epprint(output)
-                    sys.stderr.buffer.write(output)
+                    # sys.stderr.buffer.write(output)
         except subprocess.CalledProcessError as error:
             if error.returncode != expected_exit_status:
                 # ic(command, ignore_exit_code)
