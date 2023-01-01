@@ -49,7 +49,6 @@ def ask_command(command):
 # https://docs.python.org/3/library/subprocess.html#subprocess.run
 def run_command(
     command,
-    verbose: bool | int | float,
     shell: bool = True,
     expected_exit_status: int = None,
     ignore_exit_code: bool = False,
@@ -60,6 +59,7 @@ def run_command(
     interactive: bool = False,
     str_output: bool = False,
     ask: bool = False,
+    verbose: bool | int | float = False,
 ):
 
     maxone(
@@ -149,7 +149,7 @@ def run_command(
 @click.pass_context
 def cli(
     ctx,
-    verbose: bool | int | float,
     verbose_inf: bool,
+    verbose: bool | int | float = False,
 ):
     pass
