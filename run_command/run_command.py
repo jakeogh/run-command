@@ -1,31 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 
-# pylint: disable=missing-docstring               # [C0111] docstrings are always outdated and wrong
-# pylint: disable=fixme                           # [W0511] todo is encouraged
-# pylint: disable=line-too-long                   # [C0301]
-# pylint: disable=too-many-instance-attributes    # [R0902]
-# pylint: disable=too-many-lines                  # [C0302] too many lines in module
-# pylint: disable=invalid-name                    # [C0103] single letter var names, name too descriptive
-# pylint: disable=too-many-return-statements      # [R0911]
-# pylint: disable=too-many-branches               # [R0912]
-# pylint: disable=too-many-statements             # [R0915]
-# pylint: disable=too-many-arguments              # [R0913]
-# pylint: disable=too-many-nested-blocks          # [R1702]
-# pylint: disable=too-many-locals                 # [R0914]
-# pylint: disable=too-few-public-methods          # [R0903]
-# pylint: disable=no-member                       # [E1101] no member for base
-# pylint: disable=attribute-defined-outside-init  # [W0201]
-# pylint: disable=too-many-boolean-expressions    # [R0916] in if statement
 from __future__ import annotations
 
 import os
 import subprocess
 import sys
-from collections.abc import Sequence
-from math import inf
-from pathlib import Path
-from typing import Generator
 
 import click
 from asserttool import ic
@@ -34,8 +14,6 @@ from clicktool import click_add_options
 from clicktool import click_global_options
 from epprint import epprint
 from eprint import eprint
-
-# from retry_on_exception import retry_on_exception
 
 
 def ask_command(command):
@@ -59,7 +37,7 @@ def run_command(
     interactive: bool = False,
     str_output: bool = False,
     ask: bool = False,
-    verbose: bool | int | float = False,
+    verbose: bool = False,
 ):
 
     maxone(
@@ -149,6 +127,6 @@ def run_command(
 def cli(
     ctx,
     verbose_inf: bool,
-    verbose: bool | int | float = False,
+    verbose: bool = False,
 ):
     pass
