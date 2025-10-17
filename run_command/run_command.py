@@ -8,7 +8,6 @@ import subprocess
 import sys
 
 import click
-from asserttool import ic
 from asserttool import maxone
 from clicktool import click_add_options
 from clicktool import click_global_options
@@ -60,7 +59,12 @@ def run_command(
 
     output = None
     if verbose:
-        epprint(f"\n{command=}", f"{shell=}", f"{system=}", f"{popen=}\n")
+        epprint(
+            f"\n{command=}",
+            f"{shell=}",
+            f"{system=}",
+            f"{popen=}\n",
+        )
     if popen:
         if isinstance(command, bytes):
             command = command.decode("utf8")
@@ -101,7 +105,10 @@ def run_command(
             if ask:
                 ask_command(command)
             output = subprocess.check_output(
-                command, stderr=stderr, stdin=stdin, shell=shell
+                command,
+                stderr=stderr,
+                stdin=stdin,
+                shell=shell,
             )
             if verbose:
                 if output:
